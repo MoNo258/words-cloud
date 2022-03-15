@@ -15,7 +15,6 @@ if (process.env.NODE_ENV === "development") {
 
 const GlobalStyle = createGlobalStyle`
   body {
-    /* background: #F5F6FB; */
     box-sizing: border-box;
    }
 `;
@@ -23,23 +22,14 @@ const GlobalStyle = createGlobalStyle`
 const App = () => {
   return (
     <div className="body-wrapper">
-      {/* <ThemeProvider
-        theme={{
-          fontFamily: "sans-serif",
-          background: "#1e1e2f",
-          color: "#525f7f",
-          // background: "#325AF4",
-          // color: "#fff",
-        }}
-      > */}
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/game" element={<GameView />} />
+          <Route path="/*" element={<Home />} />
         </Routes>
       </BrowserRouter>
-      {/* </ThemeProvider> */}
     </div>
   );
 };

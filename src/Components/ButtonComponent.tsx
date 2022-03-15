@@ -10,6 +10,7 @@ export type ButtonComponentProps = {
   isDisabled?: boolean;
   isSubmit?: boolean;
   loading?: boolean;
+  hasMarginTop?: boolean;
 };
 
 const ButtonComponent: React.FC<ButtonComponentProps> = ({
@@ -18,18 +19,21 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
   isSubmit,
   buttonText,
   onButtonClick,
+  hasMarginTop,
 }) => {
   return (
-    <Button
-      basic
-      color="blue"
-      loading={loading}
-      type={isSubmit ? "submit" : "button"}
-      onClick={onButtonClick}
-      disabled={!!isDisabled}
-    >
-      {buttonText}
-    </Button>
+    <div style={{ marginTop: `${hasMarginTop ? "20px" : 0}` }}>
+      <Button
+        basic
+        color="blue"
+        loading={loading}
+        type={isSubmit ? "submit" : "button"}
+        onClick={onButtonClick}
+        disabled={!!isDisabled}
+      >
+        {buttonText}
+      </Button>
+    </div>
   );
 };
 export default ButtonComponent;

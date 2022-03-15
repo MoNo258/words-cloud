@@ -1,29 +1,43 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "semantic-ui-react";
+import ButtonComponent from "src/Components/ButtonComponent";
+import styled from "styled-components";
 
-const ScoreView: React.FC = () => {
+const StyledHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  h3.ui.header {
+    margin: 10px;
+  }
+`;
+
+type ScoreViewProps = {
+  pointsTotal: number;
+};
+const ScoreView: React.FC<ScoreViewProps> = ({ pointsTotal }) => {
   const navigate = useNavigate();
-  const idParam = window.location.pathname;
-  const [isLoading, setIsLoading] = React.useState(false);
   const [userName, setUserName] = React.useState<IUser["name"]>("");
-  const [pointsTotal, setPointsTotal] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    const stringUser =
+      window.localStorage.getItem("user") === null
+        ? ""
+        : window.localStorage.getItem("user");
+    const objectUser = stringUser && JSON.parse(stringUser);
+    setUserName(objectUser?.name);
+  }, []);
 
   return (
-    <React.Fragment>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Header as="h3">{`Congratulations, ${userName}!`}</Header>
-        <Header as="h3">Your score:</Header>
-        <Header as="h3">{`${pointsTotal} points`}</Header>
-      </div>
-    </React.Fragment>
+    <StyledHeader>
+      <Header as="h3">{`Congratulations, ${userName}!`}</Header>
+      <Header as="h3">Your score:</Header>
+      <Header as="h3" color="blue">{`${pointsTotal} points`}</Header>
+      <ButtonComponent buttonText="home" onButtonClick={() => navigate("/")} />
+    </StyledHeader>
   );
 };
 

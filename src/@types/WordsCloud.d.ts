@@ -2,7 +2,6 @@ interface IApiResponse {
   question: string;
   all_words: string[];
   good_words: string[];
-  // good_words: Pick<IApiResponse, "all_words">;
 }
 
 interface ICloudItem {
